@@ -27,63 +27,62 @@ import com.hashedin.service.UserService;
 @Component
 @Path("/users")
 public class UserResource {
-	 @Autowired
-	 private UserService userService;
-	 
-	 @GET
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	 public List<User> list()
-	 {
-	     // Handles GET on /tasks. Lists all the tasks we have in our system.
-	     return userService.findAll();
-	 }
-	 
-	 @GET
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	 @Path("/{userId}")
-	 public User get(@PathParam("userId") Long userId)
-	 {
-	     // Handles GET on /tasks/{taskId}. Returns a single task for the given taskId.
-	     return userService.find(userId);
-	 }
-	 
-	 @POST
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	 public Response create(User user, @Context final HttpServletResponse response) throws URISyntaxException
-	 {
-	     // Handles POST on /tasks. Creates a new task and adds it into an repository.
-		 userService.save(user);
-	     response.setStatus(Response.Status.CREATED.getStatusCode());
-	     return Response.created(new URI("/users/" + user.getUserId())).build();
-	 }
-	 
-	 @PUT
-	 @Path("/{userId}")
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	 @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	 public User update(User user, @PathParam("userId") Long userId)
-	 {
-	     // Handles PUT on /tasks/taskId. Updates the existing task with the new values.
-	     return userService.update(user, userId);
-	 }
-	 
-	 @DELETE
-	 @Path("/{userId}")
-	 public User delete(@PathParam ("userId") Long userId)
-	 {
-	     // Handles DELETE on /tasks/taskId. Deletes the existing task and returns the same.
-	     return userService.delete(userId);
-	 }
-	 
-	 @GET
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	 @Path("/{userId}/tasks")
-	 public List<Task> getTasks(@PathParam("userId") Long userId)
-	 {
-	    //return list of tasks by userid
-	     return userService.findAllTasksByUserId(userId);
-	 }
-	 
+	@Autowired
+	private UserService userService;
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<User> list() {
+		// Handles GET on /tasks. Lists all the tasks we have in our system.
+		return userService.findAll();
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Path("/{userId}")
+	public User get(@PathParam("userId") Long userId) {
+		// Handles GET on /tasks/{taskId}. Returns a single task for the given
+		// taskId.
+		return userService.find(userId);
+	}
+
+	@POST
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response create(User user,
+			@Context final HttpServletResponse response)
+			throws URISyntaxException {
+		// Handles POST on /tasks. Creates a new task and adds it into an
+		// repository.
+		userService.save(user);
+		response.setStatus(Response.Status.CREATED.getStatusCode());
+		return Response.created(new URI("/users/" + user.getUserId())).build();
+	}
+
+	@PUT
+	@Path("/{userId}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public User update(User user, @PathParam("userId") Long userId) {
+		// Handles PUT on /tasks/taskId. Updates the existing task with the new
+		// values.
+		return userService.update(user, userId);
+	}
+
+	@DELETE
+	@Path("/{userId}")
+	public User delete(@PathParam("userId") Long userId) {
+		// Handles DELETE on /tasks/taskId. Deletes the existing task and
+		// returns the same.
+		return userService.delete(userId);
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Path("/{userId}/tasks")
+	public List<Task> getTasks(@PathParam("userId") Long userId) {
+		// return list of tasks by userid
+		return userService.findAllTasksByUserId(userId);
+	}
 
 }

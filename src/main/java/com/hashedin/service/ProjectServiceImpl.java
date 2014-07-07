@@ -11,28 +11,28 @@ import com.hashedin.model.Task;
 import com.hashedin.repository.ProjectRepository;
 
 @Service("projectService")
-public class ProjectServiceImpl implements ProjectService{
-	
+public class ProjectServiceImpl implements ProjectService {
+
 	@Autowired
-    private ProjectRepository projectRepository;
+	private ProjectRepository projectRepository;
 
 	@Override
 	public Project find(Long projectId) {
-		 // Returns the Task for given taskId.
-        return projectRepository.find(projectId);
+		// Returns the Task for given taskId.
+		return projectRepository.find(projectId);
 	}
 
 	@Override
 	public List<Project> findAll() {
 		// Returns all the tasks in our system.
-        return projectRepository.findAll();
+		return projectRepository.findAll();
 	}
 
 	@Transactional
 	public Project save(Project project) {
-		 // Saves the given task object and returns the same.
+		// Saves the given task object and returns the same.
 		projectRepository.save(project);
-        return project;
+		return project;
 	}
 
 	@Override
@@ -43,13 +43,13 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Transactional
 	public Project delete(Long projectId) {
-		  // Deletes the task with the give taskId and returns the same.
-        return projectRepository.delete(projectId);
+		// Deletes the task with the give taskId and returns the same.
+		return projectRepository.delete(projectId);
 	}
 
 	@Override
 	public List<Task> findAllTasksByProjectId(long projectId) {
-		
+
 		return projectRepository.find(projectId).getTasks();
 	}
 

@@ -9,31 +9,31 @@ import com.hashedin.model.Project;
 import com.hashedin.model.Task;
 
 @Repository("projectRepository")
-public class ProjectRepositoryImpl implements ProjectRepository
-{
+public class ProjectRepositoryImpl implements ProjectRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public Project find(Long projectId) {
 		// TODO Auto-generated method stub
-        return em.find(Project.class, projectId);
+		return em.find(Project.class, projectId);
 	}
 
 	@Override
 	public List<Project> findAll() {
-		TypedQuery<Project> query = em.createNamedQuery("Project.findAll", Project.class);
-        List<Project> results = query.getResultList();
-        return results;
+		TypedQuery<Project> query = em.createNamedQuery("Project.findAll",
+				Project.class);
+		List<Project> results = query.getResultList();
+		return results;
 	}
 
 	@Override
 	public Project save(Project project) {
-		 // Saves the given task object and returns the same.
-        em.persist(project);
-        em.flush();
-        return project;
+		// Saves the given task object and returns the same.
+		em.persist(project);
+		em.flush();
+		return project;
 	}
 
 	@Override
@@ -44,9 +44,9 @@ public class ProjectRepositoryImpl implements ProjectRepository
 
 	@Override
 	public Project delete(Long projectId) {
-		Project projectToBeDeleted = em.find(Project.class, projectId); 
-	        em.remove(projectToBeDeleted);
-	        return projectToBeDeleted;
+		Project projectToBeDeleted = em.find(Project.class, projectId);
+		em.remove(projectToBeDeleted);
+		return projectToBeDeleted;
 	}
 
 	@Override

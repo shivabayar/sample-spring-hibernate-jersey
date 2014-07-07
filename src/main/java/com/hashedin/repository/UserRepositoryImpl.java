@@ -12,10 +12,10 @@ import com.hashedin.model.Task;
 import com.hashedin.model.User;
 
 @Repository("userRepository")
-public class UserRepositoryImpl implements UserRepository{
-	
+public class UserRepositoryImpl implements UserRepository {
+
 	@PersistenceContext
-    private EntityManager em;
+	private EntityManager em;
 
 	@Override
 	public User find(Long userId) {
@@ -25,17 +25,18 @@ public class UserRepositoryImpl implements UserRepository{
 
 	@Override
 	public List<User> findAll() {
-		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
-        List<User> results = query.getResultList();
-        return results;
+		TypedQuery<User> query = em
+				.createNamedQuery("User.findAll", User.class);
+		List<User> results = query.getResultList();
+		return results;
 	}
 
 	@Override
 	public User save(User user) {
-		  // Saves the given task object and returns the same.
-        em.persist(user);
-        em.flush();
-        return user;
+		// Saves the given task object and returns the same.
+		em.persist(user);
+		em.flush();
+		return user;
 	}
 
 	@Override
@@ -46,9 +47,9 @@ public class UserRepositoryImpl implements UserRepository{
 
 	@Override
 	public User delete(Long userId) {
-		 User userToBeDeleted = em.find(User.class, userId); 
-	     em.remove(userToBeDeleted);
-	     return userToBeDeleted;
+		User userToBeDeleted = em.find(User.class, userId);
+		em.remove(userToBeDeleted);
+		return userToBeDeleted;
 	}
 
 	@Override

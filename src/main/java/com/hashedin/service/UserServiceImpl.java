@@ -11,28 +11,28 @@ import com.hashedin.model.User;
 import com.hashedin.repository.UserRepository;
 
 @Service("userService")
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
-    private UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Override
 	public User find(Long userId) {
-		 // Returns the Task for given taskId.
-        return userRepository.find(userId);
+		// Returns the Task for given taskId.
+		return userRepository.find(userId);
 	}
 
 	@Override
 	public List<User> findAll() {
-		 // Returns all the tasks in our system.
-        return userRepository.findAll();
+		// Returns all the tasks in our system.
+		return userRepository.findAll();
 	}
 
 	@Transactional
 	public User save(User user) {
-		  // Saves the given task object and returns the same.
+		// Saves the given task object and returns the same.
 		userRepository.save(user);
-        return user;
+		return user;
 	}
 
 	@Override
@@ -44,12 +44,12 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public User delete(Long taskId) {
 		// Deletes the task with the give taskId and returns the same.
-        return userRepository.delete(taskId);
+		return userRepository.delete(taskId);
 	}
 
 	@Override
 	public List<Task> findAllTasksByUserId(long userId) {
-		
+
 		return userRepository.find(userId).getTasks();
 	}
 

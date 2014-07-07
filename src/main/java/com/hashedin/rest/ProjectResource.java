@@ -27,63 +27,64 @@ import com.hashedin.service.ProjectService;
 @Component
 @Path("/projects")
 public class ProjectResource {
-	 @Autowired
-	 private ProjectService projectService;
-	 
-	 @GET
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	 public List<Project> list()
-	 {
-	     // Handles GET on /tasks. Lists all the tasks we have in our system.
-	     return projectService.findAll();
-	 }
-	 
-	 @GET
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	 @Path("/{projectId}")
-	 public Project get(@PathParam("projectId") Long projectId)
-	 {
-	     // Handles GET on /tasks/{taskId}. Returns a single task for the given taskId.
-	     return projectService.find(projectId);
-	 }
-	 
-	 @POST
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	 public Response create(Project project, @Context final HttpServletResponse response) throws URISyntaxException
-	 {
-	     // Handles POST on /tasks. Creates a new task and adds it into an repository.
-		 projectService.save(project);
-	     response.setStatus(Response.Status.CREATED.getStatusCode());
-	     return Response.created(new URI("/projects/" + project.getProjectId())).build();
-	 }
-	 
-	 @PUT
-	 @Path("/{projectId}")
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	 @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	 public Project update(Project project, @PathParam("projectId") Long projectId)
-	 {
-	     // Handles PUT on /tasks/taskId. Updates the existing task with the new values.
-	     return projectService.update(project, projectId);
-	 }
-	 
-	 @DELETE
-	 @Path("/{projectId}")
-	 public Project delete(@PathParam ("projectId") Long projectId)
-	 {
-	     // Handles DELETE on /tasks/taskId. Deletes the existing task and returns the same.
-	     return projectService.delete(projectId);
-	 }
-	 
-	 @GET
-	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	 @Path("/{projectId}/tasks")
-	 public List<Task> getTasks(@PathParam("projectId") Long projectId)
-	 {
-	     //return list of tasks by projectid
-	     return projectService.findAllTasksByProjectId(projectId);
-	 }
-	 
+	@Autowired
+	private ProjectService projectService;
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<Project> list() {
+		// Handles GET on /tasks. Lists all the tasks we have in our system.
+		return projectService.findAll();
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Path("/{projectId}")
+	public Project get(@PathParam("projectId") Long projectId) {
+		// Handles GET on /tasks/{taskId}. Returns a single task for the given
+		// taskId.
+		return projectService.find(projectId);
+	}
+
+	@POST
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response create(Project project,
+			@Context final HttpServletResponse response)
+			throws URISyntaxException {
+		// Handles POST on /tasks. Creates a new task and adds it into an
+		// repository.
+		projectService.save(project);
+		response.setStatus(Response.Status.CREATED.getStatusCode());
+		return Response.created(new URI("/projects/" + project.getProjectId()))
+				.build();
+	}
+
+	@PUT
+	@Path("/{projectId}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Project update(Project project,
+			@PathParam("projectId") Long projectId) {
+		// Handles PUT on /tasks/taskId. Updates the existing task with the new
+		// values.
+		return projectService.update(project, projectId);
+	}
+
+	@DELETE
+	@Path("/{projectId}")
+	public Project delete(@PathParam("projectId") Long projectId) {
+		// Handles DELETE on /tasks/taskId. Deletes the existing task and
+		// returns the same.
+		return projectService.delete(projectId);
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Path("/{projectId}/tasks")
+	public List<Task> getTasks(@PathParam("projectId") Long projectId) {
+		// return list of tasks by projectid
+		return projectService.findAllTasksByProjectId(projectId);
+	}
 
 }

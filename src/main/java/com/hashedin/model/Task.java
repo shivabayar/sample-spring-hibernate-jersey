@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Task {
 
 	@ManyToOne
-	@JoinColumn(name="userId",referencedColumnName="userId")
+	@JoinColumn(name = "userId", referencedColumnName = "userId")
 	private User user;
 
 	@Id
@@ -35,11 +35,11 @@ public class Task {
 	private String closeDate;
 
 	@ManyToOne
-	@JoinColumn(name="projectId",referencedColumnName="projectId")
+	@JoinColumn(name = "projectId", referencedColumnName = "projectId")
 	private Project project;
 
-//	public Task() {
-//	}
+	// public Task() {
+	// }
 
 	public String getAssignTo() {
 		return assignTo;

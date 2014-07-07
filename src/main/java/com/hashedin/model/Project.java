@@ -19,50 +19,51 @@ import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 @XmlRootElement
 @Entity
 @Table(name = "projects")
-@NamedQueries({ @NamedQuery(name = "Project.findAll", query =
-"SELECT p FROM Project p") })
-public class Project
-{
+@NamedQueries({ @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p") })
+public class Project {
 
-	@XmlInverseReference(mappedBy="project")
-	@OneToMany(fetch=FetchType.EAGER,mappedBy="project",targetEntity=Task.class)
-    private List<Task> tasks;
+	@XmlInverseReference(mappedBy = "project")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", targetEntity = Task.class)
+	private List<Task> tasks;
 
 	public Project() {
-        tasks = new ArrayList<Task>();
-    }
-    
+		tasks = new ArrayList<Task>();
+	}
+
 	public List<Task> getTasks() {
-        return tasks;
-    }
+		return tasks;
+	}
 
-    @Id
-    @GeneratedValue
-    private Long projectId;
+	@Id
+	@GeneratedValue
+	private Long projectId;
 
-    private String projectTitle;
-    
-    private String projectDesc;
-    
-    
+	private String projectTitle;
+
+	private String projectDesc;
 
 	public Long getProjectId() {
 		return projectId;
 	}
+
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
+
 	public String getProjectTitle() {
 		return projectTitle;
 	}
+
 	public void setProjectTitle(String projectTitle) {
 		this.projectTitle = projectTitle;
 	}
+
 	public String getProjectDesc() {
 		return projectDesc;
 	}
+
 	public void setProjectDesc(String projectDesc) {
 		this.projectDesc = projectDesc;
 	}
-      
+
 }
