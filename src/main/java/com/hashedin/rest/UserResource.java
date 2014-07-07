@@ -3,6 +3,7 @@ package com.hashedin.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,8 +16,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.hashedin.model.Task;
 import com.hashedin.model.User;
 import com.hashedin.service.UserService;
 
@@ -71,5 +75,15 @@ public class UserResource {
 	     // Handles DELETE on /tasks/taskId. Deletes the existing task and returns the same.
 	     return userService.delete(userId);
 	 }
+	 
+	 @GET
+	 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	 @Path("/{userId}/tasks")
+	 public List<Task> getTasks(@PathParam("userId") Long userId)
+	 {
+	    //return list of tasks by userid
+	     return userService.findAllTasksByUserId(userId);
+	 }
+	 
 
 }

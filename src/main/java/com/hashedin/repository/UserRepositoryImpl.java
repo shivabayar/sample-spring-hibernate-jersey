@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import com.hashedin.model.Task;
 import com.hashedin.model.User;
 
 @Repository("userRepository")
@@ -48,6 +49,12 @@ public class UserRepositoryImpl implements UserRepository{
 		 User userToBeDeleted = em.find(User.class, userId); 
 	     em.remove(userToBeDeleted);
 	     return userToBeDeleted;
+	}
+
+	@Override
+	public List<Task> findAllTasksByUserId(long userId) {
+		// TODO Auto-generated method stub
+		return em.find(User.class, userId).getTasks();
 	}
 
 }

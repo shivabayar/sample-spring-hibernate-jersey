@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import com.hashedin.model.Project;
+import com.hashedin.model.Task;
 
 @Repository("projectRepository")
 public class ProjectRepositoryImpl implements ProjectRepository
@@ -48,4 +49,9 @@ public class ProjectRepositoryImpl implements ProjectRepository
 	        return projectToBeDeleted;
 	}
 
+	@Override
+	public List<Task> findAllTasksByProhectId(long projectId) {
+		// TODO Auto-generated method stub
+		return em.find(Project.class, projectId).getTasks();
+	}
 }

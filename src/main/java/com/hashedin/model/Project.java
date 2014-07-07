@@ -3,6 +3,7 @@ package com.hashedin.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
+
 @XmlRootElement
 @Entity
 @Table(name = "projects")
@@ -21,16 +24,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Project
 {
 
-
-	@OneToMany(fetch=FetchType.EAGER,mappedBy="project")
-    //@OrderBy("name ASC")
+	@XmlInverseReference(mappedBy="project")
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="project",targetEntity=Task.class)
     private List<Task> tasks;
 
 	public Project() {
         tasks = new ArrayList<Task>();
     }
     
-	public Collection<Task> getTask() {
+	public List<Task> getTasks() {
         return tasks;
     }
 

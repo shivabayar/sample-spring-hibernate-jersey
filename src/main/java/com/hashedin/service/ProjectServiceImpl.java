@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hashedin.model.Project;
+import com.hashedin.model.Task;
 import com.hashedin.repository.ProjectRepository;
 
 @Service("projectService")
@@ -44,6 +45,12 @@ public class ProjectServiceImpl implements ProjectService{
 	public Project delete(Long projectId) {
 		  // Deletes the task with the give taskId and returns the same.
         return projectRepository.delete(projectId);
+	}
+
+	@Override
+	public List<Task> findAllTasksByProjectId(long projectId) {
+		
+		return projectRepository.find(projectId).getTasks();
 	}
 
 }
